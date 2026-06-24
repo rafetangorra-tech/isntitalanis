@@ -1,0 +1,67 @@
+---
+import { NAV } from '~/data/site';
+import { url } from '~/lib/url';
+
+const { pathname } = Astro.url;
+const isActive = (href: string) => {
+  const full = url(href);
+  return href === '/' ? pathname === full || pathname === full.replace(/\/$/, '') : pathname.startsWith(full);
+};
+---
+
+<header class="border-b border-bone/10 bg-ink/95 backdrop-blur supports-[backdrop-filter]:bg-ink/80 sticky top-0 z-40">
+  <div class="container-narrow flex items-center justify-between py-4">
+    <a href={url('/')} class="flex items-center gap-3" aria-label="Isn't It Alanis — home">
+      <img
+        src={url('/img/logo.png')}
+        alt="Isn't It Alanis?"
+        width="48"
+        height="48"
+        class="h-10 w-10 md:h-12 md:w-12"
+      />
+      <span class="font-display tracking-wider text-bone-soft text-sm md:text-base hidden sm:inline">
+        ISN'T IT ALANIS?
+      </span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-6 text-sm font-semibold tracking-wide">
+      {NAV.filter(n => n.href !== '/booking').map(item => (
+        <a
+          href={url(item.href)}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:list={[
+            'transition-colors hover:text-brick-soft',
+            isActive(item.href) ? 'text-brick-soft' : 'text-bone/80',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <a href={url('/booking')} class="btn btn-primary text-xs md:text-sm">
+      Book
+    </a>
+  </div>
+
+  <details class="md:hidden border-t border-bone/10 bg-ink">
+    <summary class="container-narrow flex items-center justify-between py-3 cursor-pointer list-none">
+      <span class="text-xs uppercase tracking-[0.2em] font-semibold text-bone/70">Menu</span>
+      <span class="text-brick-soft">+</span>
+    </summary>
+    <nav aria-label="Mobile" class="container-narrow flex flex-col py-2 pb-4 gap-1 text-sm font-semibold">
+      {NAV.map(item => (
+        <a
+          href={url(item.href)}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:list={[
+            'py-2 transition-colors hover:text-brick-soft',
+            isActive(item.href) ? 'text-brick-soft' : 'text-bone/80',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </details>
+</header>

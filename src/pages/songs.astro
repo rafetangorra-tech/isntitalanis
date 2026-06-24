@@ -1,0 +1,50 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { SITE, SONGS } from '~/data/site';
+import { url } from '~/lib/url';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicPlaylist',
+  name: `${SITE.name} — Set List`,
+  url: `${SITE.url}${url('/songs')}`,
+  numTracks: SONGS.length,
+  track: SONGS.map((title, i) => ({
+    '@type': 'MusicRecording',
+    position: i + 1,
+    name: title,
+    byArtist: { '@type': 'MusicGroup', name: 'Alanis Morissette' },
+  })),
+};
+---
+
+<BaseLayout
+  title={`Set List — ${SITE.name}`}
+  description={`The current Isn't It Alanis? set list — ${SONGS.length} Alanis Morissette songs spanning hits, deep cuts, and fan favorites.`}
+  jsonLd={jsonLd}
+>
+  <section class="container-narrow py-16 md:py-24">
+    <div class="text-center">
+      <p class="eyebrow">Set list</p>
+      <h1 class="mt-4 text-4xl md:text-6xl">The songs.</h1>
+      <p class="mt-6 max-w-2xl mx-auto text-bone/80 leading-relaxed">
+        Hits, deep cuts, and fan favorites. Arrangements embellished for the live experience — performed in full, with no backing tracks.
+      </p>
+    </div>
+
+    <ol class="mt-14 max-w-2xl mx-auto divide-y divide-bone/10 border-y border-bone/10">
+      {SONGS.map((title, i) => (
+        <li class="py-4 flex items-baseline gap-6">
+          <span class="font-display text-brick-soft tabular-nums text-sm w-8 text-right">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <span class="text-lg text-bone-soft">{title}</span>
+        </li>
+      ))}
+    </ol>
+
+    <p class="mt-12 text-center text-sm text-bone/60 italic">
+      Set list evolves with the room. Have a request? <a class="underline underline-offset-4 decoration-brick hover:text-brick-soft" href={url('/booking')}>Ask when you book.</a>
+    </p>
+  </section>
+</BaseLayout>

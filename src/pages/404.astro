@@ -1,0 +1,17 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { url } from '~/lib/url';
+---
+
+<BaseLayout title="Not Found — Isn't It Alanis?" noindex>
+  <section class="container-narrow py-32 text-center">
+    <p class="eyebrow">404</p>
+    <h1 class="mt-4 text-4xl md:text-6xl">Isn't it ironic?</h1>
+    <p class="mt-6 max-w-md mx-auto text-bone/80">
+      This page doesn't exist. Or maybe it just slipped right through you.
+    </p>
+    <div class="mt-10">
+      <a href={url('/')} class="btn btn-primary">Back home</a>
+    </div>
+  </section>
+</BaseLayout>
