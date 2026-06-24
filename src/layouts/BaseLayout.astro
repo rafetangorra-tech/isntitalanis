@@ -89,5 +89,23 @@ const allJsonLd = [organizationSchema, ...pageJsonLd];
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      (() => {
+        const sel = '.fx-stamp, .fx-tape-reveal, .fx-typewriter-row, .fx-logo-stamp';
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const reveal = (el) => el.classList.add('is-visible');
+        if (reduce || !('IntersectionObserver' in window)) {
+          document.querySelectorAll(sel).forEach(reveal);
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); }
+          }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        document.querySelectorAll(sel).forEach((el) => io.observe(el));
+      })();
+    </script>
   </body>
 </html>

@@ -5,11 +5,15 @@ interface Props {
   name: string;
   role: string;
   imageFile: string;
+  index?: number;
 }
-const { name, role, imageFile } = Astro.props;
+const { name, role, imageFile, index = 0 } = Astro.props;
 ---
 
-<div class="group bg-ink-2 border border-bone/10 hover:border-brick transition-colors">
+<div
+  class="group bg-ink-2 border border-bone/10 hover:border-brick fx-tape-reveal"
+  style={`--fx-delay: ${index * 80}ms`}
+>
   <div class="aspect-[4/5] overflow-hidden bg-charcoal">
     <img
       src={url(`/img/members/${imageFile}`)}

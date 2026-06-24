@@ -20,20 +20,20 @@ const jsonLd = MEMBERS.map(m => ({
 >
   <section class="container-narrow py-16 md:py-24">
     <div class="text-center">
-      <p class="eyebrow">The band</p>
-      <h1 class="mt-4 text-4xl md:text-6xl">Six musicians.</h1>
-      <p class="mt-6 max-w-2xl mx-auto text-bone/80 leading-relaxed">
+      <p class="fx-stamp eyebrow">The band</p>
+      <h1 class="fx-stamp mt-4 text-4xl md:text-6xl" style="--fx-delay: 80ms">Six musicians.</h1>
+      <p class="fx-stamp mt-6 max-w-2xl mx-auto text-bone/80 leading-relaxed" style="--fx-delay: 160ms">
         Long Island-based, seasoned live players. All vocals and instruments performed live — no backing tracks, no shortcuts.
       </p>
     </div>
 
     <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {MEMBERS.map(m => (
-        <MemberCard name={m.name} role={m.role} imageFile={m.file} />
+      {MEMBERS.map((m, i) => (
+        <MemberCard name={m.name} role={m.role} imageFile={m.file} index={i} />
       ))}
     </div>
 
-    <div class="mt-16 text-center">
+    <div class="fx-stamp mt-16 text-center">
       <a href={url('/booking')} class="btn btn-primary">Book Isn't It Alanis?</a>
     </div>
   </section>

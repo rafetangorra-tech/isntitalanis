@@ -25,16 +25,16 @@ const jsonLd = {
 >
   <section class="container-narrow py-16 md:py-24">
     <div class="text-center">
-      <p class="eyebrow">Set list</p>
-      <h1 class="mt-4 text-4xl md:text-6xl">The songs.</h1>
-      <p class="mt-6 max-w-2xl mx-auto text-bone/80 leading-relaxed">
+      <p class="fx-stamp eyebrow">Set list</p>
+      <h1 class="fx-stamp mt-4 text-4xl md:text-6xl" style="--fx-delay: 80ms">The songs.</h1>
+      <p class="fx-stamp mt-6 max-w-2xl mx-auto text-bone/80 leading-relaxed" style="--fx-delay: 160ms">
         Hits, deep cuts, and fan favorites. Arrangements embellished for the live experience — performed in full, with no backing tracks.
       </p>
     </div>
 
     <ol class="mt-14 max-w-2xl mx-auto divide-y divide-bone/10 border-y border-bone/10">
       {SONGS.map((title, i) => (
-        <li class="py-4 flex items-baseline gap-6">
+        <li class="fx-typewriter-row py-4 flex items-baseline gap-6" style={`--fx-delay: ${i * 70}ms`}>
           <span class="font-display text-brick-soft tabular-nums text-sm w-8 text-right">
             {String(i + 1).padStart(2, '0')}
           </span>
@@ -43,7 +43,7 @@ const jsonLd = {
       ))}
     </ol>
 
-    <p class="mt-12 text-center text-sm text-bone/60 italic">
+    <p class="fx-stamp mt-12 text-center text-sm text-bone/60 italic">
       Set list evolves with the room. Have a request? <a class="underline underline-offset-4 decoration-brick hover:text-brick-soft" href={url('/booking')}>Ask when you book.</a>
     </p>
   </section>
