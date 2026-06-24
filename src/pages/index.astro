@@ -27,7 +27,7 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-ink">
+  <section class="relative overflow-hidden bg-ink min-h-[92vh]">
     <img
       src={url(heroPhoto)}
       alt="Isn't It Alanis? live"
@@ -37,18 +37,18 @@ const jsonLd = {
       fetchpriority="high"
     />
     <div class="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/65 to-ink"></div>
-    <div class="relative grain"></div>
-    <div class="container-narrow relative py-28 md:py-40 text-center">
+    <div class="absolute inset-0 grain pointer-events-none"></div>
+    <div class="container-narrow absolute inset-x-0 bottom-0 pb-14 md:pb-20 text-center">
       <img
         src={url('/img/logo.png')}
         alt="Isn't It Alanis?"
-        class="fx-logo-stamp mx-auto h-32 md:h-48 w-auto"
+        class="fx-logo-stamp mx-auto h-48 sm:h-60 md:h-72 lg:h-80 w-auto"
         loading="eager"
       />
-      <p class="fx-stamp mt-8 text-bone/85 max-w-2xl mx-auto leading-relaxed text-lg italic" style="--fx-delay: 220ms">
+      <p class="fx-stamp mt-6 md:mt-8 text-bone/85 max-w-2xl mx-auto leading-relaxed text-lg italic" style="--fx-delay: 220ms">
         Feel everything again — a live Alanis Morissette experience.
       </p>
-      <div class="fx-stamp mt-10 flex flex-wrap items-center justify-center gap-4" style="--fx-delay: 380ms">
+      <div class="fx-stamp mt-8 md:mt-10 flex flex-wrap items-center justify-center gap-4" style="--fx-delay: 380ms">
         <a href={url('/booking')} class="btn btn-primary">Book the band</a>
         <a href={url('/songs')} class="btn btn-ghost">See the set list</a>
       </div>
