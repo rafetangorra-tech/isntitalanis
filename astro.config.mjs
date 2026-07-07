@@ -12,7 +12,7 @@ const defaultSite = useBasePath
 const siteUrl = process.env.PUBLIC_SITE_URL || defaultSite;
 
 export default defineConfig({
-  site: 'https://www.isntitalanistribute.com',,
+  site: 'https://www.isntitalanistribute.com',
   trailingSlash: 'ignore',
   integrations: [sitemap()],
   vite: {
