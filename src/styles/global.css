@@ -130,28 +130,29 @@
     transition-timing-function: cubic-bezier(0.34, 1.16, 0.64, 1);
   }
 
-  /* Tape-pulled reveal from top — for cards / image blocks */
-  .fx-tape-reveal {
-    clip-path: inset(0 0 100% 0);
-    transform: translateY(10px);
-  }
+  /* Tape-pulled reveal from top — for cards / image blocks.
+     The clip-path wipe lives in a keyframe played on .is-visible, NOT in the
+     resting state: a clip-path'd-to-zero element reports intersectionRatio 0,
+     so IntersectionObserver would never reveal it (it hides itself forever).
+     Resting state hides via opacity only, which IO can always measure. */
+  .fx-tape-reveal { transform: translateY(10px); }
   .fx-tape-reveal.is-visible {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: translateY(0);
     transition-duration: 800ms;
+    animation: fx-tape-wipe 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--fx-delay, 0ms) both;
   }
 
-  /* Typewriter row — left-to-right wipe, used staggered for the set list */
+  /* Typewriter row — left-to-right wipe, used staggered for the set list.
+     Same fix: clip-path wipe is a keyframe, resting state is opacity-only. */
   .fx-typewriter-row {
-    clip-path: inset(0 100% 0 0);
     transform: translateX(-6px);
     transition-duration: 600ms;
   }
   .fx-typewriter-row.is-visible {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: translateX(0);
+    animation: fx-type-wipe 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--fx-delay, 0ms) both;
   }
 
   /* Logo stamp — scales in with a settle */
@@ -179,6 +180,16 @@
   }
 }
 
+@keyframes fx-tape-wipe {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes fx-type-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
 @keyframes fx-parallax {
   from { transform: translate3d(0, 0, 0) scale(1.06); }
   to   { transform: translate3d(0, -40px, 0) scale(1.06); }
@@ -198,6 +209,7 @@
     transform: none !important;
     clip-path: none !important;
     transition: none !important;
+    animation: none !important;
   }
   .fx-hero-img { animation: none !important; transform: none !important; }
   .grain::before { animation: none !important; }
